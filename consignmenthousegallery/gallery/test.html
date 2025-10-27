@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Gallery</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 50px 0;
+            background-color: #f0f0f0;
+            font-family: Arial, sans-serif;
+        }
+
+        .gallery {
+            display: flex;
+            height: 50vh;
+            max-width: 1600px;
+            margin: 0 auto;
+            gap: 20px;
+            padding: 0 20px;
+            box-sizing: border-box;
+        }
+
+        .column {
+            flex: 1;
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .inner {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            will-change: transform;
+        }
+
+        .inner img {
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            object-fit: cover;
+            filter: grayscale(100%);
+            transition: filter 0.3s ease;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        .inner img:hover {
+            filter: grayscale(0%);
+        }
+
+        /* Optimize hover: pause animation when hovering the column to avoid flicker on image boundaries */
+        .column:hover .inner {
+            /* No direct CSS pause for GSAP, handled in JS */
+        }
+    </style>
+</head>
+<body>
+    <div class="gallery">
+        <div class="column" data-direction="down">
+            <div class="inner"></div>
+        </div>
+        <div class="column" data-direction="up">
+            <div class="inner"></div>
+        </div>
+        <div class="column" data-direction="down">
+            <div class="inner"></div>
+        </div>
+        <div class="column" data-direction="up">
+            <div class="inner"></div>
+        </div>
+    </div>
+
+    <script>
+        // Generate placeholder image URLs
+        const imageUrls = [];
+        for (let i = 1; i <= 24; i++) {
+            imageUrls.push(`https://picsum.photos/400/400?random=${i}`);
+        }
+
+        // Populate columns with images
+        document.addEventListener('DOMContentLoaded', () => {
+            const columns = document.querySelectorAll('.column');
+            columns.forEach((col, index) => {
+                const inner = col.querySelector('.inner');
+                const startIdx = index * 6;
+                const urlsForColumn = imageUrls.slice(startIdx, startIdx + 6);
+
+                // Function to create and append image
+                const createImage = (url, altText) => {
+                    const img = document.createElement('img');
+                    img.src = url;
+                    img.alt = altText;
+                    img.addEventListener('click', (e) => {
+                        window.open(e.target.src, '_blank');
+                    });
+                    inner.appendChild(img);
+                    return img;
+                };
+
+                // Append first set
+                urlsForColumn.forEach((url, subIndex) => {
+                    createImage(url, `Gallery image ${index * 6 + subIndex + 1}`);
+                });
+
+                // Append second set (duplicate for infinite loop)
+                urlsForColumn.forEach((url, subIndex) => {
+                    createImage(url, `Gallery image ${index * 6 + subIndex + 1}`);
+                });
+            });
+
+            // Wait a bit for images to load and layout
+            setTimeout(() => {
+                columns.forEach(col => {
+                    const inner = col.querySelector('.inner');
+                    const dir = col.dataset.direction;
+                    const totalHeight = inner.getBoundingClientRect().height;
+                    const ch = totalHeight / 2;
+
+                    let startY, endY;
+                    if (dir === 'down') {
+                        startY = -ch;
+                        endY = 0;
+                    } else {
+                        startY = 0;
+                        endY = -ch;
+                    }
+
+                    gsap.set(inner, { y: startY });
+                    col._tween = gsap.to(inner, {
+                        y: endY,
+                        duration: 20,
+                        ease: 'none',
+                        repeat: -1
+                    });
+
+                    // Optimized hover: pause/resume on column hover instead of individual images
+                    // This prevents performance hit from rapid enter/leave events when moving between images
+                    col.addEventListener('mouseenter', () => {
+                        if (col._tween) col._tween.pause();
+                    });
+                    col.addEventListener('mouseleave', () => {
+                        if (col._tween) col._tween.play();
+                    });
+                });
+            }, 500);
+        });
+    </script>
+</body>
+</html>

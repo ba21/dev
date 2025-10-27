@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Image Gallery</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <style>
+      body {
+        margin: 0;
+        padding: 50px 0;
+        background-color: #f0f0f0;
+        background: url(background.jpg) repeat;
+        font-family: Arial, sans-serif;
+      }
+
+      .gallery {
+        display: flex;
+        height: 50vh;
+        max-width: 1600px;
+        margin: 0 auto;
+        gap: 20px;
+        padding: 0 20px;
+        box-sizing: border-box;
+      }
+
+      .column {
+        flex: 1;
+        position: relative;
+        overflow: hidden;
+        border-radius: 8px;
+        background-color: #fff;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      .inner {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        will-change: transform;
+      }
+
+      .inner img {
+        width: 100%;
+        aspect-ratio: 1 / 1;
+        object-fit: cover;
+        filter: grayscale(100%);
+        transition: filter 0.3s ease;
+        cursor: pointer;
+        /* border-radius: 4px; */
+      }
+
+      .inner img:hover {
+        filter: grayscale(0%);
+      }
+
+      /* Optimize hover: pause animation when hovering the column to avoid flicker on image boundaries */
+      .column:hover .inner {
+        /* No direct CSS pause for GSAP, handled in JS */
+      }
+      .branding {
+        margin: 2rem auto;
+        display: grid;
+        place-items: flex-start center;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="branding">
+        <img src="consignmenthousegallery-logo.png" alt="Consignment House Gallery" />
+    </div>
+    <div class="gallery">
+      <div class="column" data-direction="down">
+        <div class="inner">
+          <a href="#"
+            ><img
+              src="https://www.consignmenthousecville.com/cdn/shop/files/4eacd51906e737116f74b11eab370cc8_540x.jpg?v=1721074796"
+              alt=""
+          /></a>
+          <a href="#"
+            ><img
+              src="https://www.consignmenthousecville.com/cdn/shop/files/ae8cd55434ec30ba487a6156b98c96cd_540x.jpg?v=1741019474"
+              alt=""
+          /></a>
+          <a href="#"
+            ><img
+              src="https://www.consignmenthousecville.com/cdn/shop/files/b517060a6a65d0162eed91d1d0841d32_540x.jpg?v=1721064062"
+              alt=""
+          /></a>
+          <a href="#"
+            ><img
+              src="https://www.consignmenthousecville.com/cdn/shop/files/b2ff76deac9b30f9a1c095bc72ba381b_540x.jpg?v=1721062775"
+              alt=""
+          /></a>
+          <a href="#"
+            ><img
+              src="https://www.consignmenthousecville.com/cdn/shop/files/33e638919fd6f6e69dbc77dfebaa185e_540x.jpg?v=1720456937"
+              alt=""
+          /></a>
+          <a href="#"
+            ><img
+              src="https://www.consignmenthousecville.com/cdn/shop/products/d30712f18951074eea8ed7cbb79c71d1_540x.jpg?v=1681678151"
+              alt=""
+          /></a>
+          <a href="#"
+            ><img
+              src="https://www.consignmenthousecville.com/cdn/shop/products/54578f679829e0588c9536c4ea87d7b9_540x.jpg?v=1680386245"
+              alt=""
+          /></a>
+            <a href="#"
+            ><img
+              src="https://www.consignmenthousecville.com/cdn/shop/files/4eacd51906e737116f74b11eab370cc8_540x.jpg?v=1721074796"
+              alt=""
+          /></a>
+          <a href="#"
+            ><img
+              src="https://www.consignmenthousecville.com/cdn/shop/files/ae8cd55434ec30ba487a6156b98c96cd_540x.jpg?v=1741019474"
+              alt=""
+          /></a>
+          <a href="#"
+            ><img
+              src="https://www.consignmenthousecville.com/cdn/shop/files/b517060a6a65d0162eed91d1d0841d32_540x.jpg?v=1721064062"
+              alt=""
+          /></a>
+          <a href="#"
+            ><img
+              src="https://www.consignmenthousecville.com/cdn/shop/files/b2ff76deac9b30f9a1c095bc72ba381b_540x.jpg?v=1721062775"
+              alt=""
+          /></a>
+          <a href="#"
+            ><img
+              src="https://www.consignmenthousecville.com/cdn/shop/files/33e638919fd6f6e69dbc77dfebaa185e_540x.jpg?v=1720456937"
+              alt=""
+          /></a>
+          <a href="#"
+            ><img
+              src="https://www.consignmenthousecville.com/cdn/shop/products/d30712f18951074eea8ed7cbb79c71d1_540x.jpg?v=1681678151"
+              alt=""
+          /></a>
+          <a href="#"
+            ><img
+              src="https://www.consignmenthousecville.com/cdn/shop/products/54578f679829e0588c9536c4ea87d7b9_540x.jpg?v=1680386245"
+              alt=""
+          /></a>
+        </div>
+      </div>
+      <div class="column" data-direction="up">
+        <div class="inner">
+          <a href="#"
+            ><img
+              src="https://www.consignmenthousecville.com/cdn/shop/files/c4bfe12549bccec80c289224e7b66886_540x.jpg?v=1746467854"
+              alt=""
+          /></a>
+          <a href="#"
+            ><img
+              src="https://www.consignmenthousecville.com/cdn/shop/files/5c5d201d92de92377a3110fd071b2e32_540x.jpg?v=1743440716"
+              alt=""
+          /></a>
+          <a href="#"
+            ><img
+              src="https://www.consignmenthousecville.com/cdn/shop/files/31ff79ba1cc697f20d1047b60b3c0b7d_540x.jpg?v=1743440607"
+              alt=""
+          /></a>
+          <a href="#"
+            ><img
+              src="https://www.consignmenthousecville.com/cdn/shop/files/55115c3d22bd053cfc2f5ec323f7656a_540x.jpg?v=1742593402"
+              alt=""
+          /></a>
+          <a href="#"
+            ><img
+              src="https://www.consignmenthousecville.com/cdn/shop/files/9638ef95cbe3531d9b0ce6c4abd3bdef_540x.jpg?v=1741902750"
+              alt=""
+          /></a>
+          <a href="#"
+            ><img
+              src="https://www.consignmenthousecville.com/cdn/shop/files/8b949195bd49d2a761854644179d5a83_540x.jpg?v=1741900599"
+              alt=""
+          /></a>
+          <a href="#"
+            ><img
+              src="https://www.consignmenthousecville.com/cdn/shop/files/fca0329700d6dcd54f439781607a0dfc_417476c0-2e75-4259-ad58-6a17b756f0be_540x.jpg?v=1741897724"
+              alt=""
+          /></a>
+          <a href="#"
+            ><img
+              src="https://www.consignmenthousecville.com/cdn/shop/files/c4bfe12549bccec80c289224e7b66886_540x.jpg?v=1746467854"
+              alt=""
+          /></a>
+          <a href="#"
+            ><img
+              src="https://www.consignmenthousecville.com/cdn/shop/files/5c5d201d92de92377a3110fd071b2e32_540x.jpg?v=1743440716"
+              alt=""
+          /></a>
+          <a href="#"
+            ><img
+              src="https://www.consignmenthousecville.com/cdn/shop/files/31ff79ba1cc697f20d1047b60b3c0b7d_540x.jpg?v=1743440607"
+              alt=""
+          /></a>
+          <a href="#"
+            ><img
+              src="https://www.consignmenthousecville.com/cdn/shop/files/55115c3d22bd053cfc2f5ec323f7656a_540x.jpg?v=1742593402"
+              alt=""
+          /></a>
+          <a href="#"
+            ><img
+              src="https://www.consignmenthousecville.com/cdn/shop/files/9638ef95cbe3531d9b0ce6c4abd3bdef_540x.jpg?v=1741902750"
+              alt=""
+          /></a>
+          <a href="#"
+            ><img
+              src="https://www.consignmenthousecville.com/cdn/shop/files/8b949195bd49d2a761854644179d5a83_540x.jpg?v=1741900599"
+              alt=""
+          /></a>
+          <a href="#"
+            ><img
+              src="https://www.consignmenthousecville.com/cdn/shop/files/fca0329700d6dcd54f439781607a0dfc_417476c0-2e75-4259-ad58-6a17b756f0be_540x.jpg?v=1741897724"
+              alt=""
+          /></a>
+
+        </div>
+      </div>
+      <div class="column" data-direction="down">
+        <div class="inner">
+          <a href="#"
+            ><img
+              src="https://www.consignmenthousecville.com/cdn/shop/products/e2d9260c8be83ec6ea00593a19e006e7_540x.jpg?v=1693854468"
+              alt=""
+          /></a>
+          <a href="#"
+            ><img
+              src="https://www.consignmenthousecville.com/cdn/shop/files/420f804a8f23b8369f8b1a0affa13d71_540x.jpg?v=1755367463"
+              alt=""
+          /></a>
+          <a href="#"
+            ><img
+              src="https://www.consignmenthousecville.com/cdn/shop/products/865a158eac2a724ff0bf3c55813cb12c_8b9d0b8b-f75a-48fb-b9ab-200da0542cf8_540x.jpg?v=1679866720"
+              alt=""
+          /></a>
+          <a href="#"
+            ><img
+              src="https://www.consignmenthousecville.com/cdn/shop/files/71cda5464e4ebccb5b4c6986f10c1e62_27aa0f45-2548-4bfe-82f3-209855a50cdb_540x.jpg?v=1741629059"
+              alt=""
+          /></a>
+          <a href="#"
+            ><img
+              src="https://www.consignmenthousecville.com/cdn/shop/files/facaf00e98536698e3e7decd20ba9727_540x.jpg?v=1725910056"
+              alt=""
+          /></a>
+          <a href="#"
+            ><img
+              src="https://www.consignmenthousecville.com/cdn/shop/files/148b6ac60113a5d1b108de4c7bd90cc1_540x.jpg?v=1725911303"
+              alt=""
+          /></a>
+          <a href="#"
+            ><img
+              src="https://www.consignmenthousecville.com/cdn/shop/products/0151d61d23e18333b8c878148c22cf3d_540x.jpg?v=1707179920"
+              alt=""
+          /></a>
+          <a href="#"
+            ><img
+              src="https://www.consignmenthousecville.com/cdn/shop/products/e2d9260c8be83ec6ea00593a19e006e7_540x.jpg?v=1693854468"
+              alt=""
+          /></a>
+          <a href="#"
+            ><img
+              src="https://www.consignmenthousecville.com/cdn/shop/files/420f804a8f23b8369f8b1a0affa13d71_540x.jpg?v=1755367463"
+              alt=""
+          /></a>
+          <a href="#"
+            ><img
+              src="https://www.consignmenthousecville.com/cdn/shop/products/865a158eac2a724ff0bf3c55813cb12c_8b9d0b8b-f75a-48fb-b9ab-200da0542cf8_540x.jpg?v=1679866720"
+              alt=""
+          /></a>
+          <a href="#"
+            ><img
+              src="https://www.consignmenthousecville.com/cdn/shop/files/71cda5464e4ebccb5b4c6986f10c1e62_27aa0f45-2548-4bfe-82f3-209855a50cdb_540x.jpg?v=1741629059"
+              alt=""
+          /></a>
+          <a href="#"
+            ><img
+              src="https://www.consignmenthousecville.com/cdn/shop/files/facaf00e98536698e3e7decd20ba9727_540x.jpg?v=1725910056"
+              alt=""
+          /></a>
+          <a href="#"
+            ><img
+              src="https://www.consignmenthousecville.com/cdn/shop/files/148b6ac60113a5d1b108de4c7bd90cc1_540x.jpg?v=1725911303"
+              alt=""
+          /></a>
+          <a href="#"
+            ><img
+              src="https://www.consignmenthousecville.com/cdn/shop/products/0151d61d23e18333b8c878148c22cf3d_540x.jpg?v=1707179920"
+              alt=""
+          /></a>
+        </div>
+      </div>
+      <div class="column" data-direction="up">
+        <div class="inner">
+          <a href="#"
+            ><img
+              src="https://www.consignmenthousecville.com/cdn/shop/files/148b6ac60113a5d1b108de4c7bd90cc1_540x.jpg?v=1725911303"
+              alt=""
+          /></a>
+          <a href="#"
+            ><img
+              src="https://www.consignmenthousecville.com/cdn/shop/files/facaf00e98536698e3e7decd20ba9727_540x.jpg?v=1725910056"
+              alt=""
+          /></a>
+          <a href="#"
+            ><img
+              src="https://www.consignmenthousecville.com/cdn/shop/files/30c8817bb45e4352bb4a983028fe5392_540x.jpg?v=1725906089"
+              alt=""
+          /></a>
+          <a href="#"
+            ><img
+              src="https://www.consignmenthousecville.com/cdn/shop/products/0151d61d23e18333b8c878148c22cf3d_540x.jpg?v=1707179920"
+              alt=""
+          /></a>
+          <a href="#"
+            ><img
+              src="https://www.consignmenthousecville.com/cdn/shop/files/facaf00e98536698e3e7decd20ba9727_540x.jpg?v=1725910056"
+              alt=""
+          /></a>
+          <a href="#"
+            ><img
+              src="https://www.consignmenthousecville.com/cdn/shop/products/865a158eac2a724ff0bf3c55813cb12c_8b9d0b8b-f75a-48fb-b9ab-200da0542cf8_540x.jpg?v=1679866720"
+              alt=""
+          /></a>
+          <a href="#"
+            ><img
+              src="https://www.consignmenthousecville.com/cdn/shop/files/71cda5464e4ebccb5b4c6986f10c1e62_27aa0f45-2548-4bfe-82f3-209855a50cdb_540x.jpg?v=1741629059"
+              alt=""
+          /></a>
+          <a href="#"
+            ><img
+              src="https://www.consignmenthousecville.com/cdn/shop/files/148b6ac60113a5d1b108de4c7bd90cc1_540x.jpg?v=1725911303"
+              alt=""
+          /></a>
+          <a href="#"
+            ><img
+              src="https://www.consignmenthousecville.com/cdn/shop/files/facaf00e98536698e3e7decd20ba9727_540x.jpg?v=1725910056"
+              alt=""
+          /></a>
+          <a href="#"
+            ><img
+              src="https://www.consignmenthousecville.com/cdn/shop/files/30c8817bb45e4352bb4a983028fe5392_540x.jpg?v=1725906089"
+              alt=""
+          /></a>
+          <a href="#"
+            ><img
+              src="https://www.consignmenthousecville.com/cdn/shop/products/0151d61d23e18333b8c878148c22cf3d_540x.jpg?v=1707179920"
+              alt=""
+          /></a>
+          <a href="#"
+            ><img
+              src="https://www.consignmenthousecville.com/cdn/shop/files/facaf00e98536698e3e7decd20ba9727_540x.jpg?v=1725910056"
+              alt=""
+          /></a>
+          <a href="#"
+            ><img
+              src="https://www.consignmenthousecville.com/cdn/shop/products/865a158eac2a724ff0bf3c55813cb12c_8b9d0b8b-f75a-48fb-b9ab-200da0542cf8_540x.jpg?v=1679866720"
+              alt=""
+          /></a>
+          <a href="#"
+            ><img
+              src="https://www.consignmenthousecville.com/cdn/shop/files/71cda5464e4ebccb5b4c6986f10c1e62_27aa0f45-2548-4bfe-82f3-209855a50cdb_540x.jpg?v=1741629059"
+              alt=""
+          /></a>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // Generate placeholder image URLs
+      const imageUrls = [];
+      for (let i = 1; i <= 24; i++) {
+        imageUrls.push(`https://picsum.photos/400/400?random=${i}`);
+      }
+
+      // Populate columns with images
+      document.addEventListener("DOMContentLoaded", () => {
+        const columns = document.querySelectorAll(".column");
+
+        // Testing image loading
+        // columns.forEach((col, index) => {
+        //     const inner = col.querySelector('.inner');
+        //     const startIdx = index * 6;
+        //     const urlsForColumn = imageUrls.slice(startIdx, startIdx + 6);
+
+        //     // Function to create and append image
+        //     const createImage = (url, altText) => {
+        //         const img = document.createElement('img');
+        //         img.src = url;
+        //         img.alt = altText;
+        //         img.addEventListener('click', (e) => {
+        //             window.open(e.target.src, '_blank');
+        //         });
+        //         inner.appendChild(img);
+        //         return img;
+        //     };
+
+        //     // Append first set
+        //     urlsForColumn.forEach((url, subIndex) => {
+        //         createImage(url, `Gallery image ${index * 6 + subIndex + 1}`);
+        //     });
+
+        //     // Append second set (duplicate for infinite loop)
+        //     urlsForColumn.forEach((url, subIndex) => {
+        //         createImage(url, `Gallery image ${index * 6 + subIndex + 1}`);
+        //     });
+        // });
+
+        // Wait a bit for images to load and layout
+        setTimeout(() => {
+          columns.forEach((col) => {
+            const inner = col.querySelector(".inner");
+            const dir = col.dataset.direction;
+            const totalHeight = inner.getBoundingClientRect().height + 20; // add 20px for gap.
+            const ch = totalHeight / 2;
+
+            let startY, endY;
+            if (dir === "down") {
+              startY = -ch;
+              endY = 0;
+            } else {
+              startY = 0;
+              endY = -ch;
+            }
+
+            gsap.set(inner, { y: startY });
+            col._tween = gsap.to(inner, {
+              y: endY,
+              duration: 20,
+              ease: "none",
+              repeat: -1,
+            });
+
+            // Optimized hover: pause/resume on column hover instead of individual images
+            // This prevents performance hit from rapid enter/leave events when moving between images
+            col.addEventListener("mouseenter", () => {
+              if (col._tween) col._tween.pause();
+            });
+            col.addEventListener("mouseleave", () => {
+              if (col._tween) col._tween.play();
+            });
+          });
+        }, 500);
+      });
+    </script>
+  </body>
+</html>
